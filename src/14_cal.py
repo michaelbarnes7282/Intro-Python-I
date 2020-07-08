@@ -30,6 +30,7 @@ it should use today’s date to get the month and year.
 import sys
 import calendar
 from datetime import datetime
+
 x = datetime.now()
 
 def print_month(month = x.month, year = x.year):
@@ -39,7 +40,13 @@ args = sys.argv[1:3]
 for i in range(0, len(args)):
   args[i] = int(args[i])
 
-if args[0] > 12 or args[0] < 0 or args[1] > 9999 or args[1] < 0:
-  print('In the command line please offer additional arguements to specify the calendar you want in the format of "filename" [month] [year]')
+if len(args) == 2:
+  if args[0] > 12 or args[0] < 1:
+    print('useage: "filename" [month] [year]')
+    sys.exit(1)
+if len(args) == 3:
+  if args[0] > 12 or args[0] < 1 or args[1] > 9999 or args[1] < 0:
+    print('useage: "filename" [month] [year]')
+    sys.exit(1)
 else:
   print_month(*args)
